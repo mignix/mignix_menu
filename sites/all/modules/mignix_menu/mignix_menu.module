@@ -1,0 +1,137 @@
+<?php
+
+function mignix_menu_preprocess_page(&$variables) {
+    
+}
+function mignix_menu_help($path, $args) {
+  if ($path == 'admin/help#mignix_menu') {
+    return t('Mignix Responsive Menu is only for main menu.
+        Place newly created block where you want to be your menu.');
+  }
+}
+
+function mignix_menu_theme()
+{
+    return array(
+        'mignix_menu' => array(
+            'variables' => array('content' => NULL),
+            'template' => 'mignix_menu',
+        )
+    );
+}
+
+function mignix_menu_block_info() {
+  $blocks = array();
+ 
+  $blocks['mignix_menu'] = array(
+    'info' => t('Mignix Responsive Menu'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+ 
+  return $blocks;
+}
+
+function mignix_menu_block_view($name) {
+    
+    $currentRelativePath = drupal_get_path_alias($_GET['q']);//if home then node is returned
+    $urlBase = $GLOBALS['base_url'];
+    
+    $allMenuItems = menu_tree_all_data('main-menu');
+    $GLOBALS['content'] = "<a class='toggleMenu' href='#' style='display: none;'>Menu</a>";
+    $GLOBALS['content'] .= "<ul class='mignix'>";
+    foreach ($allMenuItems as $menuItem)
+    {
+//        var_dump($allMenuItems); exit();
+        if($menuItem['link']['href'] == "<front>" && $menuItem['link']['hidden'] != "1")
+        {
+            if($currentRelativePath == 'node')//Check is this current active path and if it is then add classes to li=>activeList and to a=>activeLink
+            {
+                $GLOBALS['content'] .= "<li class='parentList activeList list_".$menuItem['link']['mlid']."'><a class='parentLink activeLink link_".$menuItem['link']['mlid']."' href='".$urlBase."'>Home</a></li>";
+            }
+            else
+            {
+                $GLOBALS['content'] .= "<li class='parentList list_".$menuItem['link']['mlid']."'><a class='parentLink link_".$menuItem['link']['mlid']."' href='".$urlBase."'>Home</a></li>";
+            }
+        }
+        else
+        {
+            subMenu($menuItem);
+        }
+    }
+    
+    $GLOBALS['content'] .= "</ul>";
+    
+    $block = array(
+        'subject' => 'Mignix Responsive Menu',
+        'content' => $GLOBALS['content'],
+    );
+    return $block;
+}
+
+function subMenu($menuItem)
+{
+    $currentRelativePath = drupal_get_path_alias($_GET['q']);//if home then node is returned
+    $urlBase = $GLOBALS['base_url'];
+    
+    if(empty($menuItem['below']) && $menuItem['link']['hidden'] != "1")//if is parent then $menuItem['below'] is empty
+    {
+        $thisLink = drupal_get_path_alias($menuItem['link']['href']);
+        $fullPath = $urlBase."/".drupal_get_path_alias($menuItem['link']['href']);
+        if($currentRelativePath == $thisLink)
+        {
+            $GLOBALS['content'] .= "<li class='parentList activeList list_".$menuItem['link']['mlid']."'><a class='parentLink activeLink link_".$menuItem['link']['mlid']."' href='".$fullPath."'>".$menuItem['link']['link_title']."</a>";
+        }
+        else
+        {
+            $GLOBALS['content'] .= "<li class='parentList list_".$menuItem['link']['mlid']."'><a class='parentLink link_".$menuItem['link']['mlid']."' href='".$fullPath."'>".$menuItem['link']['link_title']."</a>";
+        }
+    }
+    else if(!empty($menuItem['below']) && $menuItem['link']['hidden'] != "1")
+    {
+        $thisLink = drupal_get_path_alias($menuItem['link']['href']);
+        $fullPath = $urlBase."/".drupal_get_path_alias($menuItem['link']['href']);
+        if($currentRelativePath == $thisLink)
+        {
+            $GLOBALS['content'] .= "<li class='parentList activeList list_".$menuItem['link']['mlid']."'><a class='parent parentLink activeLink link_".$menuItem['link']['mlid']."' href='".$fullPath."'>".$menuItem['link']['link_title']."</a>";
+        }
+        else
+        {
+            $GLOBALS['content'] .= "<li class='parentList list_".$menuItem['link']['mlid']."'><a class='parent parentLink link_".$menuItem['link']['mlid']."' href='".$fullPath."'>".$menuItem['link']['link_title']."</a>";
+        }
+
+        $GLOBALS['content'] .= "<ul class='mignixSub1'>";
+        
+        //Createing submenu link for parent link. Need for responsive menu
+        $thisLink = drupal_get_path_alias($menuItem['link']['href']);
+        $fullPath = $urlBase."/".drupal_get_path_alias($menuItem['link']['href']);
+        if($currentRelativePath == $thisLink)
+        {
+            $GLOBALS['content'] .= "<li class='parentList responsiveOnly activeList'><a class='parentLink activeLink' href='".$fullPath."'>".$menuItem['link']['link_title']."</a>";
+        }
+        else
+        {
+            $GLOBALS['content'] .= "<li class='parentList responsiveOnly'><a class='parentLink' href='".$fullPath."'>".$menuItem['link']['link_title']."</a>";
+        }
+        
+        foreach ($menuItem['below'] as $menuItemChild)
+        {
+            //This is for unlimited deep
+//            subMenu($menuItemChild);
+            
+            $thisLink = drupal_get_path_alias($menuItemChild['link']['href']);
+            $fullPath = $urlBase."/".drupal_get_path_alias($menuItemChild['link']['href']);
+            if($currentRelativePath == $thisLink)
+            {
+                $GLOBALS['content'] .= "<li class='parentList activeList list_".$menuItemChild['link']['mlid']."'><a class='parentLink activeLink link_".$menuItemChild['link']['mlid']."' href='".$fullPath."'>".$menuItemChild['link']['link_title']."</a>";
+            }
+            else
+            {
+                $GLOBALS['content'] .= "<li class='parentList list_".$menuItemChild['link']['mlid']."'><a class='parentLink link_".$menuItemChild['link']['mlid']."' href='".$fullPath."'>".$menuItemChild['link']['link_title']."</a>";
+            }
+        }
+        $GLOBALS['content'] .= '</ul>';
+    }
+    $GLOBALS['content'] .= "</li>";
+}
+
+?>

@@ -1,0 +1,9 @@
+name = Mignix Menu
+description = Responsive Mignix Main Menu
+package = Mignix
+core = 7.x
+files[] = mignix_menu.module
+version = 7.x-1.0
+stylesheets[all][] = mignix_menu.css
+scripts[] = mignix_menu.js
+configure = admin/user-interface/mignix-menu

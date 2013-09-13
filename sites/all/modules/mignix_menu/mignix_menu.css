@@ -1,0 +1,299 @@
+body, mignix, ul, li, a {margin: 0; padding: 0;}
+body {font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+a {text-decoration: none;}
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 10px auto;
+}
+.toggleMenu {
+    /*display:  none;*/
+    color: #09549A;
+    font-weight: bold;
+    padding: 10px 25px;
+    font-size: 1.5em;
+    border-bottom: 1px solid #09549A;
+    
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:5px;
+    
+    background-image: linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+    background-image: -o-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+    background-image: -moz-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+    background-image: -webkit-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+    background-image: -ms-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+
+    background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0.08, rgb(57,148,231)),
+            color-stop(0.54, rgb(86,178,255))
+    );
+}
+.toggleMenu, .toggleMenu:hover{
+    text-decoration: none !important;
+    color: #09549A !important;
+}
+.mignix {
+    float: left;
+/*    list-style: none;
+    position: relative;
+    padding-left: 0px;*/
+}
+.mignix:before,
+.mignix:after {
+    /*content: " ";*/ 
+    /*display: table;*/ 
+}
+.mignix:after {
+    /*clear: both;*/
+}
+.mignix ul {
+    
+}
+.mignix a {
+    padding: 10px 15px;
+}
+.mignix li {
+    position: relative;
+}
+.mignix > li {
+    float: left;
+}
+.mignix > li > .parent {
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.mignix > li > a {
+    display: block;
+}
+.mignix li  ul {
+    width: 100%;
+    position: absolute;
+    left: -9999px;
+}
+.mignixSub1 li.hover ul {
+    left: 100%;
+    top: 0;
+}
+.mignixSub1 li a {
+    display: block;
+    padding: 10px 12px;
+    position: relative;
+    z-index:100;
+}
+.mignix li li li a {
+    background:#249578;
+    z-index:200;
+}
+
+.mignix a:hover{
+    text-decoration: none;
+}
+.mignixSub1{
+    padding-left: 8px;
+}
+.mignixSub1 li{
+    
+}
+.mignixSub1 li a{
+    padding: 10% 10% 10% 10% !important;
+}
+.mignixSub1 li a:hover, .mignixSub1 li a.activeLink, .mignixSub1 li.hover{
+    color: #000A50 !important;
+}
+.mignix li.parentList:hover, .mignix li.activeList.parentList, .mignixSub1 li{
+    background-image: linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+    background-image: -o-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+    background-image: -moz-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+    background-image: -webkit-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+    background-image: -ms-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+
+    background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0.08, rgb(57,148,231)),
+            color-stop(0.54, rgb(86,178,255))
+    );
+}
+.mignix a.parentLink{
+    padding: 48px 22px 5px;
+}
+.mignix li.hover a.parentLink, .mignix a.activeLink{
+    color: #09549A;
+}
+.mignix li.parentList a.activeLink:before {
+    border-width:6px;
+    border-style: solid;
+    border-color:transparent transparent #fafafa;
+    bottom: 0px;
+    left:43%;
+    position:absolute;
+}
+.mignixSub1 a.activeLink:before { 
+    border:0 none !important; 
+}
+
+.mignix a.parentLink{
+    border-right: 1px solid #0779BF;
+    font-weight: bold;
+    color: #09549A;
+}
+.mignixSub1 a.parentLink{
+    border: none;
+}
+.removeActiveSubmenu ul{
+    display: none;
+}
+
+.responsiveOnly{
+    display: none;
+}
+
+/*Add your links background images here*/
+.mignix a.link_218{
+    background: url("images/home.png") no-repeat scroll 50% 0%;
+}
+.mignix li.hover a.link_218, .mignix a.activeLink.link_218{
+    background: url("images/home.png") no-repeat scroll 50% 0%;
+}
+
+/*only for big screens*/
+@media screen and (min-width: 852px){
+    .mignixSub1 li a{
+        color: #8e8d8e;
+    }
+    .mignixSub1 li{
+        /* border-right: 1px solid #D5D5D5; */
+        /*margin-top: 10px;*/
+        /*height: 20px;*/
+    }
+    .mignixSub1 li a{
+        /*margin-top: -10px;*/
+    }
+    .mignixSub1 li:last-child{
+        border: none;
+    }
+    .mignix > li {
+        position: relative;
+    }
+    .mignix > li.hover > ul {/*, .mignix > li.activeList > ul for displaying active submenu always*/
+        left: 0px !important;
+    }
+    .mignix li.parentList a.activeLink:before {
+        content:"";
+    }
+}
+
+/*@media screen and (max-width: 768px) {*/
+@media screen and (max-width: 852px) {
+    .active {
+        display: block;
+    }
+    .mignix > li {
+        float: none;
+    }
+    .mignix > li > .parent {
+        background-position: 95% 50%;
+    }
+    .mignix li li .parent {
+        background-repeat: no-repeat;
+        background-position: 95% 50%;
+    }
+    .mignix ul {
+        display: block;
+        width: 100%;
+    }
+   .mignix > li.hover > ul , .mignix li li.hover ul {
+        position: static;
+    }
+    .mignixSub1{
+        width: auto !important;
+        padding-left: 0px;
+    }
+    .mignixSub1 li{
+        float: none;
+        margin-top: 0px !important;
+    }
+
+    .mignixSub1 li a{
+        width: auto;
+    }
+    
+    .mignix > li {
+        /*border-top: 1px solid #104336;*/
+    }
+    .mignix{
+        position: absolute;
+        z-index: 99999;
+        margin-top: -3px !important
+    }
+    .mignix a.parentLink{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 50px;
+    }
+    .mignixSub1 li a, .responsiveOnly a {
+        background-image: linear-gradient(bottom, rgb(67,143,237) 6%, rgb(94,172,255) 53%, rgb(123,207,255) 77%);
+        background-image: -o-linear-gradient(bottom, rgb(67,143,237) 6%, rgb(94,172,255) 53%, rgb(123,207,255) 77%);
+        background-image: -moz-linear-gradient(bottom, rgb(67,143,237) 6%, rgb(94,172,255) 53%, rgb(123,207,255) 77%);
+        background-image: -webkit-linear-gradient(bottom, rgb(67,143,237) 6%, rgb(94,172,255) 53%, rgb(123,207,255) 77%);
+        background-image: -ms-linear-gradient(bottom, rgb(67,143,237) 6%, rgb(94,172,255) 53%, rgb(123,207,255) 77%);
+
+        background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0.06, rgb(67,143,237)),
+                color-stop(0.53, rgb(94,172,255)),
+                color-stop(0.77, rgb(123,207,255))
+        );
+    }
+    .mignixSub1 li a:hover, .mignixSub1 li a.activeLink{
+        color: #000A50;
+    }
+    .mignix a:hover{
+        color: #000A50;
+    }
+    .mignix a.parentLink{
+        border: none;
+    }
+    .mignix li.parentList{
+        background-image: linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+        background-image: -o-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+        background-image: -moz-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+        background-image: -webkit-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+        background-image: -ms-linear-gradient(bottom, rgb(57,148,231) 8%, rgb(86,178,255) 54%);
+
+        background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0.08, rgb(57,148,231)),
+                color-stop(0.54, rgb(86,178,255))
+        );
+    }
+    .mignix a{
+        color: #FFFFFF;
+    }
+    .mignix a.parentLink{
+        font-weight: bold;
+    }    
+    .mignix a.parentLink{
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    
+    .responsiveOnly{
+        display: block;
+    }
+    
+    /*Add your links background images here*/
+    .mignix a.link_218, .mignix li.hover a.link_218, .mignix a.activeLink.link_218{
+        background: url("images/home.png") no-repeat scroll 0% 50%;
+    }
+
+}
